@@ -75,6 +75,19 @@ jobs:
         cd openwrt
         $GITHUB_WORKSPACE/$DIY_P2_SH
     
+    - name: Config IP Address
+      run: |
+        cd /openwrt
+        mkdir -p files/etc/config
+        cat << EOF >> files/etc/config/network
+        config interface lan
+        option ifname   eth0
+        option type     bridge
+        option proto    static
+        option ipaddr   192.168.1.22
+        option netmask  255.255.255.0
+        EOF
+    
     - name: SSH connection to Actions
       uses: P3TERX/ssh2actions@v1.0.0
       if: (github.event.inputs.ssh == 'true' && github.event.inputs.ssh  != 'false') || contains(github.event.action, 'ssh')
