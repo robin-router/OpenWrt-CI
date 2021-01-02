@@ -77,7 +77,7 @@ jobs:
     
     - name: Config IP Address
       run: |
-        cd /openwrt
+        cd openwrt
         mkdir -p files/etc/config
         cat << EOF >> files/etc/config/network
         config interface lan
